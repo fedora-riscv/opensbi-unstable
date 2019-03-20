@@ -27,10 +27,10 @@ BuildRequires:  make
 BuildRequires:  dtc
 BuildRequires:  gzip
 # For docs
-BuildRequires:  doxygen
-BuildRequires:  doxygen-latex
-BuildRequires:  doxygen-doxywizard
-BuildRequires:  graphviz
+#BuildRequires:  doxygen
+#BuildRequires:  doxygen-latex
+#BuildRequires:  doxygen-doxywizard
+#BuildRequires:  graphviz
 
 
 %description
@@ -86,12 +86,12 @@ cp "$vmlinuz" Image.gz
 gunzip Image.gz
 
 make PLATFORM=qemu/virt FW_PAYLOAD_PATH="$PWD/Image"
-make docs
+#make docs
 
 
 %install
 make PLATFORM=qemu/virt I=%{buildroot} install
-make I=%{buildroot} install_docs
+#make I=%{buildroot} install_docs
 
 mkdir -p %{buildroot}%{_usr}
 mv %{buildroot}/lib %{buildroot}%{_libdir}
@@ -100,9 +100,9 @@ mv %{buildroot}/include %{buildroot}%{_usr}/
 mkdir -p %{buildroot}%{_datadir}/%{name}
 mv %{buildroot}/platform %{buildroot}%{_datadir}/%{name}/
 
-mkdir -p %{buildroot}%{_pkgdocdir}
-mv %{buildroot}/docs/refman.pdf %{buildroot}%{_pkgdocdir}/
-rm -rf %{buildroot}/docs
+#mkdir -p %{buildroot}%{_pkgdocdir}
+#mv %{buildroot}/docs/refman.pdf %{buildroot}%{_pkgdocdir}/
+#rm -rf %{buildroot}/docs
 
 # Find Fedora kernel image in /boot and extract version
 vmlinuz=$(find /boot | grep vmlinuz | grep -v -E '(rescue|hmac)')
@@ -124,7 +124,7 @@ cp build/platform/qemu/virt/firmware/fw_payload.elf \
 /boot/opensbi/unstable/fw_payload-*.elf
 
 %files libsbi-devel
-%doc %{_pkgdocdir}/refman.pdf
+#%%doc %%{_pkgdocdir}/refman.pdf
 %{_prefix}/include/sbi/*
 %{_libdir}/libsbi.a
 
