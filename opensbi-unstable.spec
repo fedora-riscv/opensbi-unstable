@@ -71,7 +71,7 @@ Summary: OpenSBI QEMU virt machine firmware with Fedora kernel embedded
 OpenSBI QEMU virt machine firmware with Fedora kernel embedded as payload.
 
 
-%packages images-riscv64
+%package images-riscv64
 Summary: OpenSBI firmware binaries with Fedora U-Boot embedded
 
 
