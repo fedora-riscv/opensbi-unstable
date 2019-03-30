@@ -86,7 +86,7 @@ U-Boot bootloader.
 %build
 mkdir -p fedora-builds/{kernel,uboot-qemu-virt}
 for build in kernel uboot-qemu-virt; do
-    cp -r $(ls -1 | grep -v fedora-builds) fedora-builds/$build
+    cp -r $(ls -1 | grep -v fedora-builds) "fedora-builds/$build"
 done
 
 # BUILD: kernel
@@ -132,7 +132,7 @@ popd
 
 %install
 # BUILD: kernel
-pushd builds/kernel
+pushd fedora-builds/kernel
 
 make PLATFORM=qemu/virt I=%{buildroot} install
 #make I=%{buildroot} install_docs
@@ -166,7 +166,7 @@ cp build/platform/qemu/virt/firmware/fw_payload.elf \
 popd
 
 # BUILD: uboot-qemu-virt
-pushd builds/uboot-qemu-virt
+pushd fedora-builds/uboot-qemu-virt
 
 cp build/platform/qemu/virt/firmware/fw_payload.elf \
    %{buildroot}/boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.elf
