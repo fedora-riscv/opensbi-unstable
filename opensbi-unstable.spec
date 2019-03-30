@@ -124,6 +124,7 @@ popd
 pushd fedora-builds/uboot-qemu-virt
 
 ubootFile=/usr/share/uboot/qemu-riscv64_smode/u-boot.bin
+file $ubootFile
 make PLATFORM=qemu/virt FW_PAYLOAD_PATH="$ubootFile"
 
 # BUILD: uboot-qemu-virt
