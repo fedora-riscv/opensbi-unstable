@@ -3,7 +3,7 @@
 
 Name:		opensbi-unstable
 # The last part is short hash
-Version:	2019.04.05.09f9768
+Version:	2019.04.05.40086da
 Release:	1%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
@@ -12,7 +12,7 @@ URL:		https://github.com/riscv/opensbi
 
 # Download tarball, e.g.:
 # https://github.com/riscv/opensbi/archive/%full_commit.tar.gz
-%global full_commit 09f976802bcd291c80b8260746bdcf5b530179ae
+%global full_commit 40086daa6275889d55829501ae926a95c9349701
 Source0:	https://github.com/riscv/opensbi/archive/%{full_commit}.tar.gz
 
 BuildRequires:	systemd-udev
@@ -196,6 +196,9 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.elf
 
 %changelog
+* Fri Apr 05 2019 David Abdurachmanov <david.abdurachmanov@gmail.com> 2019.04.05.40086da-1
+- Update revision and rebuild for new u-boot
+
 * Fri Apr 05 2019 David Abdurachmanov <david.abdurachmanov@gmail.com> 2019.04.05.09f9768-1
 - Update version and bump for new u-boot & kernel
 
