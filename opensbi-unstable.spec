@@ -4,7 +4,7 @@
 Name:		opensbi-unstable
 # The last part is short hash
 Version:	2019.04.05.40086da
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -196,6 +196,9 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.elf
 
 %changelog
+* Sun Apr 14 2019 David Abdurachmanov <david.abdurachmanov@gmail.com> 2019.04.05.40086da-3
+- Rebuild for kernel-5.1.0-0.rc4.git2.1.1.riscv64.fc31
+
 * Mon Apr 08 2019 David Abdurachmanov <david.abdurachmanov@gmail.com> 2019.04.05.40086da-2
 - Rebuild for new uboot (SMP support)
 
