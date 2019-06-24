@@ -187,7 +187,9 @@ popd
 %files libsbi-devel
 #%%doc %%{_pkgdocdir}/refman.pdf
 %{_prefix}/include/sbi/*
+%{_prefix}/include/sbi_utils/*
 %{_libdir}/libsbi.a
+%{_libdir}/libsbiutils.a
 
 %files platform-virt
 %{_datadir}/%{name}
