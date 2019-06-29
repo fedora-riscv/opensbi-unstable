@@ -4,7 +4,7 @@
 Name:		opensbi-unstable
 # The last part is short hash
 Version:	2019.06.24.65aa587
-Release:	4%{?dist}
+Release:	5%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -198,6 +198,9 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.elf
 
 %changelog
+* Sat Jun 29 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> 2019.06.24.65aa587-5
+- Rebuild for new U-Boot
+
 * Sat Jun 29 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> 2019.06.24.65aa587-4
 - Rebuild for new U-Boot
 
