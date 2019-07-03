@@ -4,7 +4,7 @@
 Name:		opensbi-unstable
 # The last part is short hash
 Version:	2019.07.02.ce228ee
-Release:	0%{?dist}
+Release:	1%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -198,6 +198,9 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.elf
 
 %changelog
+* Wed Jul 03 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> 2019.07.03.ce228ee-1
+- Rebuilt for kernel-5.2.0-0.rc7.git0.1.0.riscv64.fc31
+
 * Tue Jul 02 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> 2019.07.02.ce228ee-0
 - Update to OpenSBI 4.0 commit
 - Might improve situation where not all cores come online if QEMU instance is
