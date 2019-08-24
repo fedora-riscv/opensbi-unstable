@@ -171,6 +171,8 @@ pushd fedora-builds/uboot-qemu-virt
 
 cp build/platform/qemu/virt/firmware/fw_payload.elf \
    %{buildroot}/boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.elf
+cp build/platform/qemu/virt/firmware/fw_payload.bin \
+   %{buildroot}/boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.bin
 
 # BUILD: uboot-qemu-virt
 popd
@@ -195,7 +197,7 @@ popd
 %{_datadir}/%{name}
 
 %files images-riscv64
-/boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.elf
+/boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.{bin,elf}
 
 %changelog
 * Thu Aug 23 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4-22-g3cbb419-0
