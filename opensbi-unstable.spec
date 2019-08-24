@@ -3,7 +3,7 @@
 
 Name:		opensbi-unstable
 # The last part is short hash
-Version:	v0.4-22-g3cbb419
+Version:	v0.4.22.2019.08.24.3cbb419
 Release:	1%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
@@ -222,7 +222,7 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
-* Thu Aug 24 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4-22-g3cbb419-1
+* Thu Aug 24 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4.22.2019.08.24.3cbb419-1
 - Add SiFive Unleashed (FU540) U-Boot payload firmware variant
 
 * Thu Aug 23 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4-22-g3cbb419-0
