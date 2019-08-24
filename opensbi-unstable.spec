@@ -4,7 +4,7 @@
 Name:		opensbi-unstable
 # The last part is short hash
 Version:	v0.4-22-g3cbb419
-Release:	0%{?dist}
+Release:	1%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -84,7 +84,7 @@ U-Boot bootloader.
 
 
 %build
-mkdir -p fedora-builds/{kernel,uboot-qemu-virt}
+mkdir -p fedora-builds/{kernel,uboot-qemu-virt,uboot-sifive-fu540}
 for build in kernel uboot-qemu-virt; do
     cp -r $(ls -1 | grep -v fedora-builds) "fedora-builds/$build"
 done
@@ -125,11 +125,20 @@ pushd fedora-builds/uboot-qemu-virt
 
 ubootFile=/usr/share/uboot/qemu-riscv64_smode/u-boot.bin
 file $ubootFile
-make PLATFORM=qemu/virt FW_PAYLOAD_PATH="$ubootFile"
+make PLATFORM=qemu/virt FW_OPTIONS=0x2 FW_PAYLOAD_PATH="$ubootFile"
 
 # BUILD: uboot-qemu-virt
 popd
 
+# BUILD: uboot-sifive-fu540
+pushd fedora-builds/uboot-sifive-fu540
+
+ubootFile=/usr/share/uboot/sifive_fu540/u-boot.bin
+file $ubootFile
+make PLATFORM=sifive/fu540 FW_OPTIONS=0x2 FW_PAYLOAD_PATH="$ubootFile"
+
+# BUILD: uboot-sifive-fu540
+popd
 
 %install
 # BUILD: kernel
@@ -177,6 +186,18 @@ cp build/platform/qemu/virt/firmware/fw_payload.bin \
 # BUILD: uboot-qemu-virt
 popd
 
+# BUILD: uboot-sifive-fu540
+pushd fedora-builds/uboot-sifive-fu540
+
+cp build/platform/sifive/fu540/firmware/fw_payload.elf \
+   %{buildroot}/boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.elf
+cp build/platform/sifive/fu540/firmware/fw_payload.bin \
+   %{buildroot}/boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.bin
+
+# BUILD: uboot-sifive-fu540
+popd
+
+
 %files
 %license COPYING.BSD
 %doc README.md
@@ -198,8 +219,12 @@ popd
 
 %files images-riscv64
 /boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.{bin,elf}
+/boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
+* Thu Aug 24 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4-22-g3cbb419-1
+- Add SiFive Unleashed (FU540) U-Boot payload firmware variant
+
 * Thu Aug 23 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4-22-g3cbb419-0
 - Update OpenSBI to incl. fixes for TLB flush
 
