@@ -85,7 +85,7 @@ U-Boot bootloader.
 
 %build
 mkdir -p fedora-builds/{kernel,uboot-qemu-virt,uboot-sifive-fu540}
-for build in kernel uboot-qemu-virt; do
+for build in kernel uboot-qemu-virt uboot-sifive-fu540; do
     cp -r $(ls -1 | grep -v fedora-builds) "fedora-builds/$build"
 done
 
