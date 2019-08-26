@@ -4,7 +4,7 @@
 Name:		opensbi-unstable
 # The last part is short hash
 Version:	v0.4.22.2019.08.24.3cbb419
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -134,8 +134,11 @@ popd
 pushd fedora-builds/uboot-sifive-fu540
 
 ubootFile=/usr/share/uboot/sifive_fu540/u-boot.bin
+# We only have one kernel installed in buildroot
+dtbFile=/boot/dtb-*/sifive/hifive-unleashed-a00.dtb
 file $ubootFile
-make PLATFORM=sifive/fu540 FW_OPTIONS=0x2 FW_PAYLOAD_PATH="$ubootFile"
+file $dtbFile
+make PLATFORM=sifive/fu540 FW_OPTIONS=0x2 FW_PAYLOAD_PATH="$ubootFile" FW_PAYLOAD_FDT_PATH="$dtbFile"
 
 # BUILD: uboot-sifive-fu540
 popd
@@ -222,6 +225,9 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
+* Mon Aug 26 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4.22.2019.08.24.3cbb419-2
+- Add DTB for SiFive FU540 from upstream kernel
+
 * Thu Aug 24 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4.22.2019.08.24.3cbb419-1
 - Add SiFive Unleashed (FU540) U-Boot payload firmware variant
 
