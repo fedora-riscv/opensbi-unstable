@@ -135,7 +135,8 @@ pushd fedora-builds/uboot-sifive-fu540
 
 ubootFile=/usr/share/uboot/sifive_fu540/u-boot.bin
 # We only have one kernel installed in buildroot
-dtbFile=/boot/dtb-*/sifive/hifive-unleashed-a00.dtb
+dtbFile=$(echo /boot/dtb-*/sifive/hifive-unleashed-a00.dtb)
+#dtbFile=$(find /boot/dtb-*/sifive -type f -name hifive-unleashed-a00.dtb -print -quit 2>/dev/null)
 file $ubootFile
 file $dtbFile
 make PLATFORM=sifive/fu540 FW_OPTIONS=0x2 FW_PAYLOAD_PATH="$ubootFile" FW_PAYLOAD_FDT_PATH="$dtbFile"
