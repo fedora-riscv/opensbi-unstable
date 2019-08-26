@@ -228,10 +228,10 @@ popd
 * Mon Aug 26 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4.22.2019.08.24.3cbb419-2
 - Add DTB for SiFive FU540 from upstream kernel
 
-* Thu Aug 24 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4.22.2019.08.24.3cbb419-1
+* Sat Aug 24 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4.22.2019.08.24.3cbb419-1
 - Add SiFive Unleashed (FU540) U-Boot payload firmware variant
 
-* Thu Aug 23 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4-22-g3cbb419-0
+* Fri Aug 23 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4-22-g3cbb419-0
 - Update OpenSBI to incl. fixes for TLB flush
 
 * Wed Jul 03 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> 2019.07.03.ce228ee-1
