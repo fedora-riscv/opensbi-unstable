@@ -4,7 +4,7 @@
 Name:		opensbi-unstable
 # The last part is short hash
 Version:	v0.4.22.2019.08.24.3cbb419
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -226,6 +226,9 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
+* Tue Aug 27 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4.22.2019.08.24.3cbb419-3
+- Rebuild for U-Boot 2019.10 RC3
+
 * Mon Aug 26 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4.22.2019.08.24.3cbb419-2
 - Add DTB for SiFive FU540 from upstream kernel
 
