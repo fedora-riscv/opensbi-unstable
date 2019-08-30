@@ -92,29 +92,13 @@ done
 # BUILD: kernel
 pushd fedora-builds/kernel
 
-# Use klist.txt to find the latest installed kernel
-[ -f /etc/sysconfig/uboot ] && . /etc/sysconfig/uboot
-
-ubootDir=${UBOOT_DIR:-"/boot"}
-ubootKList=${UBOOT_KLIST:-"klist.txt"}
-
-if [ ! -f $ubootDir/$ubootKList ]; then
-    echo "U-Boot klist was not found! Cannot locate latest installed kernel image!"
-    exit 1
-fi
-
-latestKernel="/lib/modules/$(tail -n1 "$ubootDir/$ubootKList")/vmlinuz"
+latestKernel=$(ls -1t /lib/modules/*/vmlinuz | head -n1)
 
 file "$latestKernel"
 
 echo "Payload: $latestKernel"
 
-# Kernel is built with Image.gz target, we need to unpack before embedding it
-# into OpenSBI
-cp "$latestKernel" Image.gz
-gunzip Image.gz
-
-make PLATFORM=qemu/virt FW_PAYLOAD_PATH="$PWD/Image"
+make PLATFORM=qemu/virt FW_PAYLOAD_PATH="$latestKernel"
 #make docs
 
 # BUILD: kernel
@@ -162,13 +146,7 @@ mv %{buildroot}/platform %{buildroot}%{_datadir}/%{name}/
 #mv %{buildroot}/docs/refman.pdf %{buildroot}%{_pkgdocdir}/
 #rm -rf %{buildroot}/docs
 
-# Use klist.txt to find the latest installed kernel
-[ -f /etc/sysconfig/uboot ] && . /etc/sysconfig/uboot
-
-ubootDir=${UBOOT_DIR:-"/boot"}
-ubootKList=${UBOOT_KLIST:-"klist.txt"}
-latestKernelVersion=$(tail -n1 "$ubootDir/$ubootKList")
-
+latestKernelVersion=$(ls -1t /lib/modules/*/vmlinuz | head -n1 | cut -d'/' -f4)
 
 mkdir -p %{buildroot}/boot/opensbi/unstable
 cp build/platform/qemu/virt/firmware/fw_jump.elf \
