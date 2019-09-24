@@ -3,8 +3,9 @@
 
 Name:		opensbi-unstable
 # The last part is short hash
-Version:	v0.4.22.2019.08.24.3cbb419
-Release:	4%{?dist}
+# Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
+Version:	v0.4.32.2019.09.24.98ee15c
+Release:	1%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -12,7 +13,7 @@ URL:		https://github.com/riscv/opensbi
 
 # Download tarball, e.g.:
 # https://github.com/riscv/opensbi/archive/%full_commit.tar.gz
-%global full_commit 3cbb419def46e95b04d43f2d95f126f653e55589
+%global full_commit 98ee15ca3adcf7bc22695897cd63a3ce8c5c53ff
 Source0:	https://github.com/riscv/opensbi/archive/%{full_commit}.tar.gz
 
 BuildRequires:	systemd-udev
@@ -204,6 +205,9 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
+* Fri Aug 30 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4.32.2019.09.24.98ee15c-1
+- Bump OpenSBI to latest revision
+
 * Fri Aug 30 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.4.22.2019.08.24.3cbb419-4
 - Rebuild for new U-Boot
 
