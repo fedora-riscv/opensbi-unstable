@@ -5,7 +5,7 @@ Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
 Version:	v0.5.0.2019.10.09.be92da2
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -205,6 +205,9 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
+* Thu Oct 17 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.10.09.be92da2-2
+- Rebuild for new U-Boot
+
 * Wed Oct 09 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.10.09.be92da2-1
 - Update to the official v0.5 OpenSBI
 - Rebuild for the official U-Boot v2019.10
