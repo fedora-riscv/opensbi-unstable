@@ -5,7 +5,7 @@ Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
 Version:	v0.5.0.2019.10.09.be92da2
-Release:	4%{?dist}
+Release:	5%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -207,6 +207,9 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
+* Wed Oct 23 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.10.09.be92da2-5
+- Update DTB patch from upstream review
+
 * Wed Oct 23 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.10.09.be92da2-4
 - Fix linker error if DTB size is not 16-byte aligned
 
