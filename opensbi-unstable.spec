@@ -83,7 +83,7 @@ OpenSBI firmware images for all supported platforms with embedded Fedora
 U-Boot bootloader.
 
 %prep
-%autosetup -n opensbi-%{full_commit}
+%autosetup -n opensbi-%{full_commit} -p1
 
 
 %build
