@@ -5,7 +5,7 @@ Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
 Version:	v0.5.0.2019.10.09.be92da2
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -15,6 +15,8 @@ URL:		https://github.com/riscv/opensbi
 # https://github.com/riscv/opensbi/archive/%full_commit.tar.gz
 %global full_commit be92da280d87c38a2e0adc5d3f43bab7b5468f09
 Source0:	https://github.com/riscv/opensbi/archive/%{full_commit}.tar.gz
+
+Patch0:     0001-fw_payload.S-allow-FDT-payload-where-size-is-not-16-.patch
 
 BuildRequires:	systemd-udev
 BuildRequires:	grubby-deprecated
@@ -205,6 +207,9 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
+* Wed Oct 23 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.10.09.be92da2-4
+- Fix linker error if DTB size is not 16-byte aligned
+
 * Tue Oct 22 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.10.09.be92da2-3
 - Rebuild for new kernel
 
