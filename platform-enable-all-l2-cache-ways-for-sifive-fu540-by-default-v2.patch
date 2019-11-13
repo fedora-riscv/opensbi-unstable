@@ -1,0 +1,255 @@
+Delivered-To: david.abdurachmanov@gmail.com
+Received: by 2002:a7b:c0d0:0:0:0:0:0 with SMTP id s16csp279978wmh;
+        Mon, 4 Nov 2019 22:46:26 -0800 (PST)
+X-Google-Smtp-Source: APXvYqyym2U7PmjHA31S3d6OPEGgWZ7XUVAGOsZb3XoesAkQMAiojLjr5Xn1MdNpHqMNdy6A+283
+X-Received: by 2002:a17:90a:9406:: with SMTP id r6mr4666294pjo.0.1572936386651;
+        Mon, 04 Nov 2019 22:46:26 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1572936386; cv=none;
+        d=google.com; s=arc-20160816;
+        b=TOz3zjCw16F58fgpNQD1oSK58rfpQ5rBN8qaAmFHzDR6mKS46wR6i9QDabf/OKRDXb
+         nzPa9QZyRPEigAMobCV7kYnBsvzmADq5bt1Id9/5x4oIAV56kMUDEeLE7J+/Om5fVrwF
+         miO9/1SuSx8H4kAvuO55EuRqLs3sJNxxHpKZz+4/QSolKieV/lOaF2eUSFdgYlBEoKoy
+         b1zk3UNU9c6nAN2ju0BX5Zi+G9ThThBgoSos6DtNISyRB7Yg9nruFeADelfIVxMDXbud
+         HdMwMHnlf2R+XOchT75OKE+RgMLQJgP4BbfsRBxeAuVQqIL8iK7RK+FdcB59qvawrdoY
+         pVmg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=errors-to:sender:content-transfer-encoding:mime-version:cc
+         :list-subscribe:list-help:list-post:list-archive:list-unsubscribe
+         :list-id:precedence:message-id:date:subject:to:from:dkim-signature
+         :dkim-signature;
+        bh=0mqtx2MTEmU7MFjcCpEGIOx1Iit0JCIPQxwkKaorKRc=;
+        b=Pnt94HBwgBX1+LEnBGfWPe91yAboi32CQdqNtjoYA5c0Sybfqdk0se/Bw+KYle53Ci
+         i+Z5pJV4pRPjoEQTWoSbarWEkBQGmG8JQJmJy00xwBnbDurRvBmUqwu6nVF+zP+71qSs
+         6ZDYEYwEtc2Ql1L3/V9Ck+m5/L9971Uf/pVvQLhmJT8/99BCS87eMDQvZoB0X6xCh3re
+         eB1LQDS9XeWJ27FXR3X/S2ov2xUbeNXmbBwiLNleY55iTOlpfAUuTScG4+v4fbJYPf9C
+         ZQK0EVYzqTDwAuBVkRsI1vs7j7IdkZCn9Fy6Z3X3H3LbODucFZF0vzGQaWi8OJtkBRCN
+         NX5g==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@lists.infradead.org header.s=bombadil.20170209 header.b=jKcYjAxK;
+       dkim=neutral (body hash did not verify) header.i=@sifive.com header.s=google header.b=jVUamnTb;
+       spf=pass (google.com: best guess record for domain of opensbi-bounces+david.abdurachmanov=gmail.com@lists.infradead.org designates 2607:7c80:54:e::133 as permitted sender) smtp.mailfrom="opensbi-bounces+david.abdurachmanov=gmail.com@lists.infradead.org"
+Return-Path: <opensbi-bounces+david.abdurachmanov=gmail.com@lists.infradead.org>
+Received: from bombadil.infradead.org (bombadil.infradead.org. [2607:7c80:54:e::133])
+        by mx.google.com with ESMTPS id h60si24093272pje.41.2019.11.04.22.46.26
+        for <david.abdurachmanov@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 04 Nov 2019 22:46:26 -0800 (PST)
+Received-SPF: pass (google.com: best guess record for domain of opensbi-bounces+david.abdurachmanov=gmail.com@lists.infradead.org designates 2607:7c80:54:e::133 as permitted sender) client-ip=2607:7c80:54:e::133;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@lists.infradead.org header.s=bombadil.20170209 header.b=jKcYjAxK;
+       dkim=neutral (body hash did not verify) header.i=@sifive.com header.s=google header.b=jVUamnTb;
+       spf=pass (google.com: best guess record for domain of opensbi-bounces+david.abdurachmanov=gmail.com@lists.infradead.org designates 2607:7c80:54:e::133 as permitted sender) smtp.mailfrom="opensbi-bounces+david.abdurachmanov=gmail.com@lists.infradead.org"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.infradead.org; s=bombadil.20170209; h=Sender:
+	Content-Transfer-Encoding:Content-Type:MIME-Version:Cc:List-Subscribe:
+	List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:Message-Id:Date:
+	Subject:To:From:Reply-To:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+	References:List-Owner; bh=0mqtx2MTEmU7MFjcCpEGIOx1Iit0JCIPQxwkKaorKRc=; b=jKc
+	YjAxKWihvAZffq5McNoaLqtltUKJr+q0wOdlYHHv3LoXDZlePg/L/PsRqitOeeQNgP+VTuMzE22Hy
+	r9e7hBKTckNjCkGAzK2rr9oamvKkVzT2gHhH/rUoeLGafVIBRWRkcEPhKXAK5rPstFWMOWrD+2lcA
+	hEfRY5PvtqRo1XLOyry+NyxhECMj//6WgFxtZiIqR9+X9hQ3Qlft55nVFD0A9VbQTJCcvJ/IDrF8b
+	zU+2QzYqKasvWn5p4r0DYf1n1vRW7Zbbba/R7Tioeht1ewR3CSOothsRelrDIjeyBdywiA2sBSeiM
+	EG6dYptVA6aforwSfcBLGT9Y4A5EWlw==;
+Received: from localhost ([127.0.0.1] helo=bombadil.infradead.org)
+	by bombadil.infradead.org with esmtp (Exim 4.92.3 #3 (Red Hat Linux))
+	id 1iRsbe-00037x-I9; Tue, 05 Nov 2019 06:46:22 +0000
+Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644])
+ by bombadil.infradead.org with esmtps (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1iRsbb-00037V-I9
+ for opensbi@lists.infradead.org; Tue, 05 Nov 2019 06:46:21 +0000
+Received: by mail-pl1-x644.google.com with SMTP id o9so2191212plk.6
+ for <opensbi@lists.infradead.org>; Mon, 04 Nov 2019 22:46:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=nhA+wrUuPjiuAVRE+Ta/ipt1rgjXrOKwPW0+yI2j7RA=;
+ b=jVUamnTbAHtvIGjiw15wztYPM4QzXkOmkFCljEFhXFqAq8Jwykn0MKXu7HHBPkvF1L
+ kGjTBwVIfCCDY6DppFo9FCcFSf4+AS6Yp7+KsmiGZK21yFE5ZSAl5SZ2S4jtcUCwkBZI
+ lCS9EN4fjzkflMO0mAyHrEM2DAL4UhdRZ9sszKmkdwl7rrA4uzeZJRAhHbj1ubxTry4E
+ DC3BSWMY0OSITKzZPWggyazy6iqqHBhzo9HWFJFE/vfh5lCHm7PQBk6bznJ2NxWpZ4Wy
+ VxUjcomv5P51Yc5JBCiJJ63qhkxV6n/xW/AqtO0ClbNvmHOcAz4Dd0g+fFbiAQiMmgWI
+ vgUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=nhA+wrUuPjiuAVRE+Ta/ipt1rgjXrOKwPW0+yI2j7RA=;
+ b=VMFwUgHSl1ZiQ215V6zzsAjgPARiMvde6syMJsNho8C//fcAyhsRlnvvTcy761mPTO
+ siPnNGDJY31s0jjNzPQ/lZLfXLHQRzW3tLJA/dJXtKZJo3NWsxvN+JzWibxjwp6MI2NI
+ d9pbylwk+MZG1dPjYzvxFTZMUJm77V3yIu1LF5HNgM45YfmNK64pIFENLu2SSjmeZhbV
+ w1HrdCBMWh41xEDmjE7BaQBTCZOxJXDG4vHjGFBMm/+dZhN0qgzjNaO7ayZm+8CtLtI9
+ SRMelN7pkqJmQdfKzdQ/zCjqLkjq8Jb5HOEcH1oCxitx+Ru6wsxZGU3nANWp3Pj9Otsu
+ lTrg==
+X-Gm-Message-State: APjAAAW/9oYpdlkxR90NSZ6M0ZkDM2g9nSxAxADCoNX9njK0e3Ba/V4+
+ uWwMWSBVX1fGgmKaIu8IGyQ5nF1GYvH+0g==
+X-Received: by 2002:a17:902:8208:: with SMTP id
+ x8mr32410040pln.232.1572936377999; 
+ Mon, 04 Nov 2019 22:46:17 -0800 (PST)
+Received: from localhost.localdomain (220-132-236-182.HINET-IP.hinet.net.
+ [220.132.236.182])
+ by smtp.gmail.com with ESMTPSA id w2sm23560035pgm.18.2019.11.04.22.46.16
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+ Mon, 04 Nov 2019 22:46:17 -0800 (PST)
+From: Vincent Chen <vincent.chen@sifive.com>
+To: opensbi@lists.infradead.org
+Subject: [PATCH v2] platform: Enable all L2 cache ways for sifive fu540 by
+ default
+Date: Tue,  5 Nov 2019 14:46:01 +0800
+Message-Id: <1572936361-12970-1-git-send-email-vincent.chen@sifive.com>
+X-Mailer: git-send-email 2.7.4
+X-CRM114-Version: 20100106-BlameMichelson ( TRE 0.8.0 (BSD) ) MR-646709E3 
+X-CRM114-CacheID: sfid-20191104_224619_634635_CE0381A1 
+X-CRM114-Status: GOOD (  11.62  )
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: SpamAssassin version 3.4.2 on bombadil.infradead.org summary:
+ Content analysis details:   (-0.2 points)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [2607:f8b0:4864:20:0:0:0:644 listed in]
+ [list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-BeenThere: opensbi@lists.infradead.org
+X-Mailman-Version: 2.1.29
+Precedence: list
+List-Id: <opensbi.lists.infradead.org>
+List-Unsubscribe: <http://lists.infradead.org/mailman/options/opensbi>,
+ <mailto:opensbi-request@lists.infradead.org?subject=unsubscribe>
+List-Archive: <http://lists.infradead.org/pipermail/opensbi/>
+List-Post: <mailto:opensbi@lists.infradead.org>
+List-Help: <mailto:opensbi-request@lists.infradead.org?subject=help>
+List-Subscribe: <http://lists.infradead.org/mailman/listinfo/opensbi>,
+ <mailto:opensbi-request@lists.infradead.org?subject=subscribe>
+Cc: Vincent Chen <vincent.chen@sifive.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Sender: "opensbi" <opensbi-bounces@lists.infradead.org>
+Errors-To: opensbi-bounces+david.abdurachmanov=gmail.com@lists.infradead.org
+
+Some bootloaders don't enable the entire cache on boot. To avoid
+performance degradation, the entire L2 cache should be enabled by
+default. If needed, the user can specify the enabled cache
+way number via the macro FU540_CCACHE_ENABLEWAY_NUM.
+
+Chnages from v1->v2
+1. Corrected the typo in the macro FU540_CCR_WAY_MASK definition
+2. Added/Removed empty line.
+
+
+Signed-off-by: Vincent Chen <vincent.chen@sifive.com>
+---
+ docs/platform/sifive_fu540.md    | 18 ++++++++++++++++++
+ platform/sifive/fu540/objects.mk |  3 +++
+ platform/sifive/fu540/platform.c | 22 ++++++++++++++++++++++
+ 3 files changed, 43 insertions(+)
+
+diff --git a/docs/platform/sifive_fu540.md b/docs/platform/sifive_fu540.md
+index 9fb45d6..63f0b94 100644
+--- a/docs/platform/sifive_fu540.md
++++ b/docs/platform/sifive_fu540.md
+@@ -13,6 +13,7 @@ To build platform specific library and firmwares, provide the
+ Platform Options
+ ----------------
+ 
++1. *FU540_ENABLED_HART_MASK*
+ As hart0 in the FU540 doesn't have an MMU, only harts 1-4 boot by default.
+ A hart mask i.e. *FU540_ENABLED_HART_MASK* compile time option is provided
+ to select any other hart for booting. Please keep in mind that this is not
+@@ -24,6 +25,23 @@ make PLATFORM=sifive/fu540 FW_PAYLOAD_PATH=Image FU540_ENABLED_HART_MASK=0x02
+ ```
+ This will let the board boot only hart1 instead of default 1-4.
+ 
++2. *FU540_CCACHE_ENABLEWAY_NUM*
++FU540 L2 cache controller offers extensive flexibility as it allows for several
++features in addition to the L2 Cache functionality, such as memory-mapped
++access to L2 Cache RAM for disabled cache ways and scratchpad functionality.
++Out of reset, all ways, except for way 0, are disabled. Cache ways can be
++enabled via the L2 controller register. By default, OpenSBI will enable all
++cache ways. If needed, the enabled cache way number can be specified by the
++following command:
++
++```
++make PLATFORM=sifive/fu540 FW_PAYLOAD_PATH=Image FU540_CCACHE_ENABLEWAY_NUM=0x5
++```
++This will enable the way 1 through way 5. Please keep in mind that once a cache
++way is enabled, it can not be disabled unless the FU540-C000 is reset.  In other
++words, the macro FU540_CCACHE_ENABLEWAY_NUM cannot disable the ways enabled by
++FSBL or other bootloaders.
++
+ Building SiFive Fu540 Platform
+ -----------------------------
+ 
+diff --git a/platform/sifive/fu540/objects.mk b/platform/sifive/fu540/objects.mk
+index f09a305..3f730ad 100644
+--- a/platform/sifive/fu540/objects.mk
++++ b/platform/sifive/fu540/objects.mk
+@@ -11,3 +11,6 @@ platform-objs-y += platform.o
+ ifdef FU540_ENABLED_HART_MASK
+ platform-genflags-y += -DFU540_ENABLED_HART_MASK=$(FU540_ENABLED_HART_MASK)
+ endif
++ifdef FU540_CCACHE_ENABLEWAY_NUM
++platform-genflags-y += -DFU540_CCACHE_ENABLEWAY_NUM=$(FU540_CCACHE_ENABLEWAY_NUM)
++endif
+diff --git a/platform/sifive/fu540/platform.c b/platform/sifive/fu540/platform.c
+index 81e8e8d..974cc44 100644
+--- a/platform/sifive/fu540/platform.c
++++ b/platform/sifive/fu540/platform.c
+@@ -36,6 +36,13 @@
+ #define FU540_UART1_ADDR			0x10011000
+ #define FU540_UART_BAUDRATE			115200
+ 
++#define FU540_CCACHE_CONTROLLER_ADDR		0x02010000
++#define FU540_CCACHE_CONFIG_REG_OFF		0x0
++#define FU540_CCACHE_WAYENABLE_REG_OFF		0x8
++
++/* FU540 Cache Configuration Register */
++#define FU540_CCR_WAY_BIT_OFF			0x8
++#define FU540_CCR_WAY_MASK			(0xff << FU540_CCR_WAY_BIT_OFF)
+ /**
+  * The FU540 SoC has 5 HARTs but HART ID 0 doesn't have S mode. enable only
+  * HARTs 1 to 4.
+@@ -88,6 +95,20 @@ static void fu540_modify_dt(void *fdt)
+ 	plic_fdt_fixup(fdt, "riscv,plic0");
+ }
+ 
++static void fu540_ccache_init(void)
++{
++	/* By default, enable all L2 cache ways */
++	int l2c_way = (readl((volatile void *)(FU540_CCACHE_CONTROLLER_ADDR +
++		FU540_CCACHE_CONFIG_REG_OFF)) & FU540_CCR_WAY_MASK) >>
++		FU540_CCR_WAY_BIT_OFF;
++#ifdef FU540_CCACHE_ENABLEWAY_NUM
++	if (FU540_CCACHE_ENABLEWAY_NUM < l2c_way)
++		l2c_way = FU540_CCACHE_ENABLEWAY_NUM;
++#endif
++	writeb((char)l2c_way,
++	  (void *)(FU540_CCACHE_CONTROLLER_ADDR + FU540_CCACHE_WAYENABLE_REG_OFF));
++}
++
+ static int fu540_final_init(bool cold_boot)
+ {
+ 	void *fdt;
+@@ -95,6 +116,7 @@ static int fu540_final_init(bool cold_boot)
+ 	if (!cold_boot)
+ 		return 0;
+ 
++	fu540_ccache_init();
+ 	fdt = sbi_scratch_thishart_arg1_ptr();
+ 	fu540_modify_dt(fdt);
+ 
+-- 
+2.7.4
+
+
+_______________________________________________
+opensbi mailing list
+opensbi@lists.infradead.org
+http://lists.infradead.org/mailman/listinfo/opensbi

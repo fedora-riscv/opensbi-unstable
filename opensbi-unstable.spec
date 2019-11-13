@@ -4,8 +4,8 @@
 Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
-Version:	v0.5.0.2019.10.09.be92da2
-Release:	10%{?dist}
+Version:	v0.5.0.2019.11.13.18897aa
+Release:	1%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -13,10 +13,10 @@ URL:		https://github.com/riscv/opensbi
 
 # Download tarball, e.g.:
 # https://github.com/riscv/opensbi/archive/%full_commit.tar.gz
-%global full_commit be92da280d87c38a2e0adc5d3f43bab7b5468f09
+%global full_commit 18897aaf5d0382017c05a5690d0bc8e0d044270f
 Source0:	https://github.com/riscv/opensbi/archive/%{full_commit}.tar.gz
 
-Patch0:     0001-fw_payload.S-allow-FDT-payload-where-size-is-not-16-.patch
+Patch0:     platform-enable-all-l2-cache-ways-for-sifive-fu540-by-default-v2.patch
 
 BuildRequires:	systemd-udev
 BuildRequires:	grubby-deprecated
@@ -207,6 +207,12 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
+* Wed Nov 13 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.11.13.18897aa-1
+- New OpenSBI revision
+- New kernel
+- New U-Boot
+- Incl. a patch to enable all L2 ways on SiFive FU540 (final patch will be in FSBL)
+
 * Wed Oct 30 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.10.09.be92da2-10
 - Rebuild for new U-Boot
 
