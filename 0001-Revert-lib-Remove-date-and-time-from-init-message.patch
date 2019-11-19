@@ -1,0 +1,32 @@
+From 1335a319e431eb106485d561bf3d4ad2a5acd16b Mon Sep 17 00:00:00 2001
+From: David Abdurachmanov <david.abdurachmanov@sifive.com>
+Date: Tue, 19 Nov 2019 13:41:07 +0200
+Subject: [PATCH] Revert "lib: Remove date and time from init message"
+
+This reverts commit 215421ca610a64b8ec188c96ea8588ae2de41fb7.
+---
+ lib/sbi/sbi_init.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/lib/sbi/sbi_init.c b/lib/sbi/sbi_init.c
+index 265bb02..e1acb57 100644
+--- a/lib/sbi/sbi_init.c
++++ b/lib/sbi/sbi_init.c
+@@ -35,10 +35,11 @@ static void sbi_boot_prints(struct sbi_scratch *scratch, u32 hartid)
+ 
+ 	misa_string(str, sizeof(str));
+ #ifdef OPENSBI_VERSION_GIT
+-	sbi_printf("\nOpenSBI %s\n", OPENSBI_VERSION_GIT);
++	sbi_printf("\nOpenSBI %s (%s %s)\n", OPENSBI_VERSION_GIT,
++		   __DATE__, __TIME__);
+ #else
+-	sbi_printf("\nOpenSBI v%d.%d\n", OPENSBI_VERSION_MAJOR,
+-		   OPENSBI_VERSION_MINOR);
++	sbi_printf("\nOpenSBI v%d.%d (%s %s)\n", OPENSBI_VERSION_MAJOR,
++		   OPENSBI_VERSION_MINOR, __DATE__, __TIME__);
+ #endif
+ 
+ 	sbi_printf(BANNER);
+-- 
+2.23.0
+
