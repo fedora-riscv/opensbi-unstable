@@ -1,0 +1,166 @@
+Delivered-To: david.abdurachmanov@gmail.com
+Received: by 2002:a1c:ba85:0:0:0:0:0 with SMTP id k127csp215463wmf;
+        Wed, 4 Dec 2019 00:06:28 -0800 (PST)
+X-Google-Smtp-Source: APXvYqymtlM+4tCl2/yB515J0bJSnpd/5j1tl4MzVDKlvnONxE0hB8T8OW5i8dg/r9WZ6LYY4QT/
+X-Received: by 2002:a63:ff1e:: with SMTP id k30mr2091675pgi.273.1575446787862;
+        Wed, 04 Dec 2019 00:06:27 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1575446787; cv=none;
+        d=google.com; s=arc-20160816;
+        b=mR0B+hM9nUmnKi37ZYbLQDb4OgCLsP+9/EGuW7axiuV18JygUjyXevVCJ+/Mbva7hy
+         DRfs75Lhb2SKbDb13a/+5vzS28MHrbntn8mWUWPl84gol5vMahe3HojBQz/11OQG0TOC
+         R66q33PuWeimvAYvDj6AuewdSOmlD+jwhqMIqQBWf13cjmnxxuNclAK1dYLjNCFT4sRk
+         OMIOuw69S+9DjQjyshPdBeUeOtFW4dAFzfs1hMsmQhOMrVRA5Gk5MPuKuGfsLepB37lI
+         mkYZZjPZ1CTI0j1WwZZrd1D7wzCxG7MA3C6miC0nfRuGjvPoz6A1bTTlVQb6dSzy6MAj
+         eJzA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=errors-to:sender:content-transfer-encoding:cc:list-subscribe
+         :list-help:list-post:list-archive:list-unsubscribe:list-id
+         :precedence:mime-version:message-id:date:subject:to:from
+         :dkim-signature:dkim-signature;
+        bh=6tIUOvUuh84D+uHwn07g6JfSkTnohk2lxX0R8GiOsFk=;
+        b=OUD8ei3RIi9IYdy+d1df4wJfpu2Hlquhh82CBIsQWAV1gbiMSLlnztXlN66KQfD8Vb
+         LAkLsE8Osa+qH80x7fwprcNHKvPCNfDOcRBTMknc0BNSPQSSLW96hPr8tj4yXvRu2fcQ
+         g9+tVC55eAN8NGX2MUk66N+0gjkDjKw7uhj+nRKQwvrqoURpLkgaI2leGJIYVRGWeuJ6
+         Lz6fR3+dXneJd0Xq3OUSfYQkLJ/oBPeF5MW36sySaKX1AqGycPLU1LrxnBXvK2n+T8NQ
+         MrAJrlqN5ZGV+F32RTvYuwnzz5qtjTil6e32eLMthgE80yrXFdTSvJa/nWLN8kiqxKI/
+         uPBQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@lists.infradead.org header.s=bombadil.20170209 header.b=Tvy2eaKy;
+       dkim=neutral (body hash did not verify) header.i=@pietryka.at header.s=mail header.b=kb8Uuf9c;
+       spf=pass (google.com: best guess record for domain of opensbi-bounces+david.abdurachmanov=gmail.com@lists.infradead.org designates 2607:7c80:54:e::133 as permitted sender) smtp.mailfrom="opensbi-bounces+david.abdurachmanov=gmail.com@lists.infradead.org";
+       dmarc=fail (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=pietryka.at
+Return-Path: <opensbi-bounces+david.abdurachmanov=gmail.com@lists.infradead.org>
+Received: from bombadil.infradead.org (bombadil.infradead.org. [2607:7c80:54:e::133])
+        by mx.google.com with ESMTPS id p17si4152578pli.81.2019.12.04.00.06.27
+        for <david.abdurachmanov@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Dec 2019 00:06:27 -0800 (PST)
+Received-SPF: pass (google.com: best guess record for domain of opensbi-bounces+david.abdurachmanov=gmail.com@lists.infradead.org designates 2607:7c80:54:e::133 as permitted sender) client-ip=2607:7c80:54:e::133;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@lists.infradead.org header.s=bombadil.20170209 header.b=Tvy2eaKy;
+       dkim=neutral (body hash did not verify) header.i=@pietryka.at header.s=mail header.b=kb8Uuf9c;
+       spf=pass (google.com: best guess record for domain of opensbi-bounces+david.abdurachmanov=gmail.com@lists.infradead.org designates 2607:7c80:54:e::133 as permitted sender) smtp.mailfrom="opensbi-bounces+david.abdurachmanov=gmail.com@lists.infradead.org";
+       dmarc=fail (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=pietryka.at
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=lists.infradead.org; s=bombadil.20170209; h=Sender:
+	Content-Transfer-Encoding:Content-Type:Cc:List-Subscribe:List-Help:List-Post:
+	List-Archive:List-Unsubscribe:List-Id:MIME-Version:Message-Id:Date:Subject:To
+	:From:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:
+	List-Owner; bh=6tIUOvUuh84D+uHwn07g6JfSkTnohk2lxX0R8GiOsFk=; b=Tvy2eaKyVvyTyF
+	HicNAI30py9B20kwkdRq4rEBZRJjypzU3WiKvxBA5NiCrNMiQ/s5G7RykABeDNr8i6iMO5QaLoSOJ
+	7JWStroYkENHW/6PVFbTLPle+gi2oYSLLzW7Zw6fe/rdmTe3Owl5+Ks6EKsty0AEF11kG1JFoLAsb
+	ZrZ+45oMcPhhbPBz50cRPPA8gbBIanadF2P4CJ8cLPy0/HRJI5MTP7zElDNLeqfnLkgS4RaFORxkA
+	ODItU7ItHzk1HlHd4a5g1h2mxSF1z0rHfw44QFh7pQPxjENilO1hObyJPLhuYEcRSttXj8YbHZiYH
+	QkqoSR3HKIgLWTjuIRVA==;
+Received: from localhost ([127.0.0.1] helo=bombadil.infradead.org)
+	by bombadil.infradead.org with esmtp (Exim 4.92.3 #3 (Red Hat Linux))
+	id 1icPg1-0006cP-CG; Wed, 04 Dec 2019 08:06:25 +0000
+Received: from box.pietryka.at ([5.39.93.72])
+ by bombadil.infradead.org with esmtps (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1icOGJ-00005E-HY
+ for opensbi@lists.infradead.org; Wed, 04 Dec 2019 06:35:51 +0000
+Received: from authenticated-user (box.pietryka.at [5.39.93.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by box.pietryka.at (Postfix) with ESMTPSA id 1EF547DA26;
+ Wed,  4 Dec 2019 06:26:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=pietryka.at; s=mail;
+ t=1575440764; bh=Qb5r2z6VhkUbvnDEBVFa11MUsEZxNjGY0TYL6vr/QXo=;
+ h=From:To:Cc:Subject:Date:From;
+ b=kb8Uuf9caP/GQSWx8BExUZsVfutE1hYb1Re/Fd3wPFITV62KXzyxTqobMCOPiAl0x
+ bzbYWgt/3aXlwXgGTlka4iVQZv5FmvkPmfFFO4gV5PHXQ1fqTMqxs0YvmU9YbuKhqy
+ aTsB+VImITloTZiu+TXrRhmAjG7IqDo3UAMt5agaOXww2GQDG0j5nyKM+aeF+W13UK
+ mWBsVIf9DaN/7qMJCQ4iPHhQt2jLRSwd2mAyZ0/Yfn8Uw1euUgvYxcDyzvn7bC4PoW
+ RDFUn0F+zdV1glyXmzWbHtozQ3p0mQtR2VTnyHstL13GpGX+jqQuOXjlNRoXrQeV45
+ Ha99iaS34867Q==
+From: Martin Pietryka <martin@pietryka.at>
+To: opensbi@lists.infradead.org
+Subject: [PATCH] include: sbi_platform: fix compilation for GCC-9
+Date: Wed,  4 Dec 2019 07:25:51 +0100
+Message-Id: <20191204062551.3036-1-martin@pietryka.at>
+MIME-Version: 1.0
+X-CRM114-Version: 20100106-BlameMichelson ( TRE 0.8.0 (BSD) ) MR-646709E3 
+X-CRM114-CacheID: sfid-20191203_223548_685742_C6847517 
+X-CRM114-Status: GOOD (  10.18  )
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: SpamAssassin version 3.4.2 on bombadil.infradead.org summary:
+ Content analysis details:   (-0.2 points)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+X-Mailman-Approved-At: Wed, 04 Dec 2019 00:06:24 -0800
+X-BeenThere: opensbi@lists.infradead.org
+X-Mailman-Version: 2.1.29
+Precedence: list
+List-Id: <opensbi.lists.infradead.org>
+List-Unsubscribe: <http://lists.infradead.org/mailman/options/opensbi>,
+ <mailto:opensbi-request@lists.infradead.org?subject=unsubscribe>
+List-Archive: <http://lists.infradead.org/pipermail/opensbi/>
+List-Post: <mailto:opensbi@lists.infradead.org>
+List-Help: <mailto:opensbi-request@lists.infradead.org?subject=help>
+List-Subscribe: <http://lists.infradead.org/mailman/listinfo/opensbi>,
+ <mailto:opensbi-request@lists.infradead.org?subject=subscribe>
+Cc: Martin Pietryka <martin@pietryka.at>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Sender: "opensbi" <opensbi-bounces@lists.infradead.org>
+Errors-To: opensbi-bounces+david.abdurachmanov=gmail.com@lists.infradead.org
+
+GCC-9 will throw a warning when using the %s format specifier with a
+possible NULL parameter and since -Werror is used, the compilation breaks
+for GCC-9.
+
+In function 'sbi_boot_prints',
+    inlined from 'init_coldboot' at <redacted>/opensbi/lib/sbi/sbi_init.c:107:3,
+    inlined from 'sbi_init' at <redacted>/opensbi/lib/sbi/sbi_init.c:189:3:
+<redacted>/opensbi/lib/sbi/sbi_init.c:56:2: error: '%s' directive argument is null [-Werror=format-overflow=]
+   56 |  sbi_printf("Platform Name          : %s\n", sbi_platform_name(plat));
+      |  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+
+This is one way to fix this, currently there is nothing in the tree
+checking for `sbi_platfrom_name() == NULL` so we can just return "Unknown"
+instead of NULL on failure.
+
+Signed-off-by: Martin Pietryka <martin@pietryka.at>
+---
+ include/sbi/sbi_platform.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/include/sbi/sbi_platform.h b/include/sbi/sbi_platform.h
+index beb2f23..010328e 100644
+--- a/include/sbi/sbi_platform.h
++++ b/include/sbi/sbi_platform.h
+@@ -200,13 +200,13 @@ struct sbi_platform {
+  *
+  * @param plat pointer to struct sbi_platform
+  *
+- * @return pointer to platform name on success and NULL on failure
++ * @return pointer to platform name on success and "Unknown" on failure
+  */
+ static inline const char *sbi_platform_name(const struct sbi_platform *plat)
+ {
+ 	if (plat)
+ 		return plat->name;
+-	return NULL;
++	return "Unknown";
+ }
+ 
+ /**
+-- 
+2.24.0
+
+
+_______________________________________________
+opensbi mailing list
+opensbi@lists.infradead.org
+http://lists.infradead.org/mailman/listinfo/opensbi

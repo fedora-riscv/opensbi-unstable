@@ -16,6 +16,8 @@ URL:		https://github.com/riscv/opensbi
 %global full_commit 813f7f4c250af9f7c9546f64778e9b35bb7d7dcb
 Source0:	https://github.com/riscv/opensbi/archive/%{full_commit}.tar.gz
 
+# See: https://lists.infradead.org/pipermail/opensbi/2019-December/000775.html
+Patch0:     include-sbi_platform-fix-compilation-for-GCC-9.patch
 Patch1:     0001-Revert-lib-Remove-date-and-time-from-init-message.patch
 
 BuildRequires:	systemd-udev
