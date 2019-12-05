@@ -4,7 +4,7 @@
 Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
-Version:	v0.5.0.2019.11.19.215421c
+Version:	v0.5.0.2019.12.05.813f7f4
 Release:	1%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
@@ -13,7 +13,7 @@ URL:		https://github.com/riscv/opensbi
 
 # Download tarball, e.g.:
 # https://github.com/riscv/opensbi/archive/%full_commit.tar.gz
-%global full_commit 215421ca610a64b8ec188c96ea8588ae2de41fb7
+%global full_commit 813f7f4c250af9f7c9546f64778e9b35bb7d7dcb
 Source0:	https://github.com/riscv/opensbi/archive/%{full_commit}.tar.gz
 
 Patch0:     platform-enable-all-l2-cache-ways-for-sifive-fu540-by-default-v2.patch
@@ -208,6 +208,10 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
+* Thu Dec 05 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.12.05.813f7f4-1
+- New OpenSBI revision
+- New U-Boot (2020.01 RC4)
+
 * Tue Nov 19 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.11.19.215421c-1
 - New OpenSBI revision
 - New U-Boot
