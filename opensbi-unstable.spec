@@ -16,7 +16,6 @@ URL:		https://github.com/riscv/opensbi
 %global full_commit 813f7f4c250af9f7c9546f64778e9b35bb7d7dcb
 Source0:	https://github.com/riscv/opensbi/archive/%{full_commit}.tar.gz
 
-Patch0:     platform-enable-all-l2-cache-ways-for-sifive-fu540-by-default-v2.patch
 Patch1:     0001-Revert-lib-Remove-date-and-time-from-init-message.patch
 
 BuildRequires:	systemd-udev
