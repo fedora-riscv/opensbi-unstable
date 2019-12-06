@@ -5,7 +5,7 @@ Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
 Version:	v0.5.0.2019.12.05.813f7f4
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -19,6 +19,7 @@ Source0:	https://github.com/riscv/opensbi/archive/%{full_commit}.tar.gz
 # See: https://lists.infradead.org/pipermail/opensbi/2019-December/000775.html
 Patch0:     include-sbi_platform-fix-compilation-for-GCC-9.patch
 Patch1:     0001-Revert-lib-Remove-date-and-time-from-init-message.patch
+Patch2:     set-stack-size-16K.patch
 
 BuildRequires:	systemd-udev
 BuildRequires:	grubby-deprecated
@@ -209,6 +210,9 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
+* Thu Dec 06 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.12.05.813f7f4-3
+- Increase stack size for (QEMU virt, sifive_u and SiFive FU540) to 16K (new default in U-Boot)
+
 * Thu Dec 05 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.12.05.813f7f4-2
 - Rebuild for new U-Boot
 
