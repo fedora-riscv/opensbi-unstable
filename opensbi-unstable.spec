@@ -5,7 +5,7 @@ Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
 Version:	v0.5.0.2019.12.05.813f7f4
-Release:	7%{?dist}
+Release:	8%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -108,6 +108,9 @@ echo "Payload: $latestKernel"
 # into OpenSBI
 cp "$latestKernel" Image.gz
 gunzip Image.gz
+
+dtbFile=$(echo /boot/dtb-*/sifive/hifive-unleashed-a00.dtb)
+file $dtbFile
 
 make PLATFORM=sifive/fu540 FW_OPTIONS=0x2 FU540_ENABLED_HART_MASK=0x02 FW_PAYLOAD_FDT_PATH="$dtbFile" FW_PAYLOAD_PATH="$PWD/Image"
 #make docs
