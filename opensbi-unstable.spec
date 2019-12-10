@@ -5,7 +5,7 @@ Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
 Version:	v0.5.0.2019.12.05.813f7f4
-Release:	8%{?dist}
+Release:	9%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -163,13 +163,13 @@ mv %{buildroot}/platform %{buildroot}%{_datadir}/%{name}/
 latestKernelVersion=$(ls -1t /lib/modules/*/vmlinuz | head -n1 | cut -d'/' -f4)
 
 mkdir -p %{buildroot}/boot/opensbi/unstable
-cp build/platform/qemu/virt/firmware/fw_jump.elf \
+cp build/platform/sifive/fu540/firmware/fw_jump.elf \
    %{buildroot}/boot/opensbi/unstable/fw_jump.elf
-cp build/platform/qemu/virt/firmware/fw_jump.bin \
+cp build/platform/sifive/fu540/firmware/fw_jump.bin \
    %{buildroot}/boot/opensbi/unstable/fw_jump.bin
-cp build/platform/qemu/virt/firmware/fw_payload.elf \
+cp build/platform/sifive/fu540/firmware/fw_payload.elf \
    %{buildroot}/boot/opensbi/unstable/fw_payload-${latestKernelVersion}.elf
-cp build/platform/qemu/virt/firmware/fw_payload.bin \
+cp build/platform/sifive/fu540/firmware/fw_payload.bin \
    %{buildroot}/boot/opensbi/unstable/fw_payload-${latestKernelVersion}.bin
 
 # BUILD: kernel
