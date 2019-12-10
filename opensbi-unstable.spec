@@ -5,7 +5,7 @@ Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
 Version:	v0.5.0.2019.12.05.813f7f4
-Release:	5%{?dist}
+Release:	6%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -104,7 +104,12 @@ file "$latestKernel"
 
 echo "Payload: $latestKernel"
 
-make PLATFORM=qemu/virt FW_PAYLOAD_PATH="$latestKernel"
+# Kernel is built with Image.gz target, we need to unpack before embedding it
+# into OpenSBI
+cp "$latestKernel" Image.gz
+gunzip Image.gz
+
+make PLATFORM=qemu/virt FW_OPTIONS=0x2 FU540_ENABLED_HART_MASK=0x02 FW_PAYLOAD_FDT_PATH="$dtbFile" FW_PAYLOAD_PATH="$PWD/Image"
 #make docs
 
 # BUILD: kernel
@@ -157,8 +162,12 @@ latestKernelVersion=$(ls -1t /lib/modules/*/vmlinuz | head -n1 | cut -d'/' -f4)
 mkdir -p %{buildroot}/boot/opensbi/unstable
 cp build/platform/qemu/virt/firmware/fw_jump.elf \
    %{buildroot}/boot/opensbi/unstable/fw_jump.elf
+cp build/platform/qemu/virt/firmware/fw_jump.bin \
+   %{buildroot}/boot/opensbi/unstable/fw_jump.bin
 cp build/platform/qemu/virt/firmware/fw_payload.elf \
    %{buildroot}/boot/opensbi/unstable/fw_payload-${latestKernelVersion}.elf
+cp build/platform/qemu/virt/firmware/fw_payload.bin \
+   %{buildroot}/boot/opensbi/unstable/fw_payload-${latestKernelVersion}.bin
 
 # BUILD: kernel
 popd
