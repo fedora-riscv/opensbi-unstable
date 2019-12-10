@@ -201,8 +201,8 @@ popd
 /boot/opensbi/unstable/fw_jump.elf
 
 %files fedora
-/boot/opensbi/unstable/fw_payload-*.elf
-%exclude /boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.elf
+/boot/opensbi/unstable/fw_payload-*.{bin,elf}
+%exclude /boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.{bin,elf}
 
 %files libsbi-devel
 #%%doc %%{_pkgdocdir}/refman.pdf
