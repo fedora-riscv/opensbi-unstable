@@ -198,7 +198,7 @@ popd
 %files
 %license COPYING.BSD
 %doc README.md
-/boot/opensbi/unstable/fw_jump.elf
+/boot/opensbi/unstable/fw_jump.{bin,elf}
 
 %files fedora
 /boot/opensbi/unstable/fw_payload-*.{bin,elf}
