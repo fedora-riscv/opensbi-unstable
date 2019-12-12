@@ -5,7 +5,7 @@ Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
 Version:	v0.5.0.2019.12.05.813f7f4
-Release:	9%{?dist}
+Release:	10%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
