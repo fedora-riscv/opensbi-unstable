@@ -5,7 +5,7 @@ Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
 Version:	v0.5.0.2019.12.05.813f7f4
-Release:	10%{?dist}
+Release:	11%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -112,7 +112,7 @@ gunzip Image.gz
 dtbFile=$(echo /boot/dtb-*/sifive/hifive-unleashed-a00.dtb)
 file $dtbFile
 
-make PLATFORM=sifive/fu540 FW_OPTIONS=0x2 FU540_ENABLED_HART_MASK=0x02 FW_PAYLOAD_FDT_PATH="$dtbFile" FW_PAYLOAD_PATH="$PWD/Image"
+make PLATFORM=sifive/fu540 FW_OPTIONS=0x2 FW_PAYLOAD_FDT_PATH="$dtbFile" FW_PAYLOAD_PATH="$PWD/Image"
 #make docs
 
 # BUILD: kernel
@@ -137,7 +137,7 @@ dtbFile=$(echo /boot/dtb-*/sifive/hifive-unleashed-a00.dtb)
 #dtbFile=$(find /boot/dtb-*/sifive -type f -name hifive-unleashed-a00.dtb -print -quit 2>/dev/null)
 file $ubootFile
 file $dtbFile
-make PLATFORM=sifive/fu540 FW_OPTIONS=0x2 FU540_ENABLED_HART_MASK=0x02 FW_PAYLOAD_PATH="$ubootFile" FW_PAYLOAD_FDT_PATH="$dtbFile"
+make PLATFORM=sifive/fu540 FW_OPTIONS=0x2 FW_PAYLOAD_PATH="$ubootFile" FW_PAYLOAD_FDT_PATH="$dtbFile"
 
 # BUILD: uboot-sifive-fu540
 popd
