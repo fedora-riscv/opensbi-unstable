@@ -5,7 +5,7 @@ Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
 Version:	v0.5.0.2019.12.05.813f7f4
-Release:	11%{?dist}
+Release:	12%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -222,6 +222,9 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
+* Sun Dec 15 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.12.05.813f7f4-12
+- Rebuild for new kernel
+
 * Thu Dec 06 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.12.05.813f7f4-3
 - Increase stack size for (QEMU virt, sifive_u and SiFive FU540) to 16K (new default in U-Boot)
 
