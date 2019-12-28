@@ -4,8 +4,8 @@
 Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
-Version:	v0.5.0.2019.12.05.813f7f4
-Release:	12%{?dist}
+Version:	v0.5.0.2019.12.28.c7d1b12
+Release:	1%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
 License:	BSD
@@ -13,13 +13,10 @@ URL:		https://github.com/riscv/opensbi
 
 # Download tarball, e.g.:
 # https://github.com/riscv/opensbi/archive/%full_commit.tar.gz
-%global full_commit 813f7f4c250af9f7c9546f64778e9b35bb7d7dcb
+%global full_commit c7d1b12199a11f8dcccb631a742eb31c79f8d0d2
 Source0:	https://github.com/riscv/opensbi/archive/%{full_commit}.tar.gz
 
-# See: https://lists.infradead.org/pipermail/opensbi/2019-December/000775.html
-Patch0:     include-sbi_platform-fix-compilation-for-GCC-9.patch
-Patch1:     0001-Revert-lib-Remove-date-and-time-from-init-message.patch
-Patch2:     set-stack-size-16K.patch
+Patch0:     0001-Revert-lib-Remove-date-and-time-from-init-message.patch
 
 BuildRequires:	systemd-udev
 BuildRequires:	grubby-deprecated
@@ -222,6 +219,9 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
+* Sat Dec 28 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.12.28.c7d1b12-1
+- Rebuild for new kernel
+
 * Sun Dec 15 2019 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2019.12.05.813f7f4-12
 - Rebuild for new kernel
 
