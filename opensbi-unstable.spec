@@ -4,7 +4,7 @@
 Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
-Version:	v0.5.0.2020.01.07.a67fd68
+Version:	v0.5.0.2020.02.19.c66543d
 Release:	1%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
@@ -13,7 +13,7 @@ URL:		https://github.com/riscv/opensbi
 
 # Download tarball, e.g.:
 # https://github.com/riscv/opensbi/archive/%full_commit.tar.gz
-%global full_commit a67fd68cbf02af84af9e6e7f8e28aadcecc94910
+%global full_commit c66543d049d33b94f1915babaed6eb1f90e05f78
 Source0:	https://github.com/riscv/opensbi/archive/%{full_commit}.tar.gz
 
 Patch0:     0001-Revert-lib-Remove-date-and-time-from-init-message.patch
@@ -219,8 +219,11 @@ popd
 /boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
+* Wed Feb 19 2020 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2020.02.19.c66543d-1
+- Rebuild for a new OpenSBI (incl. a fix for FU540 TLB flush issue)
+
 * Tue Jan 07 2020 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2020.01.07.a67fd68-1
-- Rebild for a new U-Boot and kernel
+- Rebuild for a new U-Boot and kernel
 
 * Thu Jan 02 2020 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2020.01.02.c0849cd-2
 - Rebuild for new U-Boot
