@@ -4,7 +4,7 @@
 Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
-Version:	v0.5.0.2020.02.19.c66543d
+Version:	v0.8.81.2021.01.06.7dcb1e1
 Release:	1%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
@@ -13,30 +13,16 @@ URL:		https://github.com/riscv/opensbi
 
 # Download tarball, e.g.:
 # https://github.com/riscv/opensbi/archive/%full_commit.tar.gz
-%global full_commit c66543d049d33b94f1915babaed6eb1f90e05f78
+%global full_commit 7dcb1e1753e9c5daec0580779ea8c31778bff152
 Source0:	https://github.com/riscv/opensbi/archive/%{full_commit}.tar.gz
 
-Patch0:     0001-Revert-lib-Remove-date-and-time-from-init-message.patch
-
-BuildRequires:	systemd-udev
-BuildRequires:	grubby-deprecated
 BuildRequires:	gcc
 BuildRequires:	binutils
 BuildRequires:	findutils
 BuildRequires:	grep
 BuildRequires:	coreutils
-BuildRequires:	kernel-core
 BuildRequires:  make
 BuildRequires:  dtc
-BuildRequires:  gzip
-BuildRequires:  file
-# U-Boot binary builds for all platforms
-BuildRequires:  uboot-images-riscv64
-# For docs
-#BuildRequires:  doxygen
-#BuildRequires:  doxygen-latex
-#BuildRequires:  doxygen-doxywizard
-#BuildRequires:  graphviz
 
 
 %description
@@ -44,181 +30,36 @@ RISC-V Open Source Supervisor Binary Interface compiled in jump variant.
 This is only for QEMU RISC-V virt machine.
 
 
-%package libsbi-devel
-Summary: Platform independent static OpenSBI library
-
-
-%description libsbi-devel
-The main component of OpenSBI is provided in the form of a platform independent 
-static library libsbi.a implementing the SBI interface. A firmware or bootloader 
-implementation can link against this library to ensure conformance with the SBI 
-interface specifications. libsbi.a also defines an interface for integrating 
-with platform specific operations provided by the platform firmware 
-implementation (e.g. console access functions, inter-processor interrupts 
-control, etc).
-
-
-%package platform-virt
-Summary: QEMU virt machine platform specific artifacts
-
-
-%description platform-virt
-libplatsbi.a and bootloaders (ELF and binary) for QEMU virt machine.
-
-
-%package fedora
-Summary: OpenSBI QEMU virt machine firmware with Fedora kernel embedded
-
-
-%description fedora
-OpenSBI QEMU virt machine firmware with Fedora kernel embedded as payload.
-
-
-%package images-riscv64
-Summary: OpenSBI firmware binaries with Fedora U-Boot embedded
-
-
-%description images-riscv64
-OpenSBI firmware images for all supported platforms with embedded Fedora
-U-Boot bootloader.
-
 %prep
-%autosetup -n opensbi-%{full_commit} -p1
+%autosetup -n opensbi-%{full_commit}
 
 
 %build
-mkdir -p fedora-builds/{kernel,uboot-qemu-virt,uboot-sifive-fu540}
-for build in kernel uboot-qemu-virt uboot-sifive-fu540; do
-    cp -r $(ls -1 | grep -v fedora-builds) "fedora-builds/$build"
-done
-
-# BUILD: kernel
-pushd fedora-builds/kernel
-
-latestKernel=$(ls -1t /lib/modules/*/vmlinuz | head -n1)
-
-file "$latestKernel"
-
-echo "Payload: $latestKernel"
-
-# Kernel is built with Image.gz target, we need to unpack before embedding it
-# into OpenSBI
-cp "$latestKernel" Image.gz
-gunzip Image.gz
-
-dtbFile=$(echo /boot/dtb-*/sifive/hifive-unleashed-a00.dtb)
-file $dtbFile
-
-make PLATFORM=sifive/fu540 FW_OPTIONS=0x2 FW_PAYLOAD_FDT_PATH="$dtbFile" FW_PAYLOAD_PATH="$PWD/Image"
-#make docs
-
-# BUILD: kernel
-popd
-
-# BUILD: uboot-qemu-virt
-pushd fedora-builds/uboot-qemu-virt
-
-ubootFile=/usr/share/uboot/qemu-riscv64_smode/u-boot.bin
-file $ubootFile
-make PLATFORM=qemu/virt FW_OPTIONS=0x2 FW_PAYLOAD_PATH="$ubootFile"
-
-# BUILD: uboot-qemu-virt
-popd
-
-# BUILD: uboot-sifive-fu540
-pushd fedora-builds/uboot-sifive-fu540
-
-ubootFile=/usr/share/uboot/sifive_fu540/u-boot.bin
-# We only have one kernel installed in buildroot
-dtbFile=$(echo /boot/dtb-*/sifive/hifive-unleashed-a00.dtb)
-#dtbFile=$(find /boot/dtb-*/sifive -type f -name hifive-unleashed-a00.dtb -print -quit 2>/dev/null)
-file $ubootFile
-file $dtbFile
-make PLATFORM=sifive/fu540 FW_OPTIONS=0x2 FW_PAYLOAD_PATH="$ubootFile" FW_PAYLOAD_FDT_PATH="$dtbFile"
-
-# BUILD: uboot-sifive-fu540
-popd
+make PLATFORM=generic
 
 %install
-# BUILD: kernel
-pushd fedora-builds/kernel
+make PLATFORM=generic I=%{buildroot} INSTALL_LIB_PATH=lib64 install
 
-make PLATFORM=qemu/virt I=%{buildroot} install
-#make I=%{buildroot} install_docs
-
-mkdir -p %{buildroot}%{_usr}
-mv %{buildroot}/lib %{buildroot}%{_libdir}
-mv %{buildroot}/include %{buildroot}%{_usr}/
-
-mkdir -p %{buildroot}%{_datadir}/%{name}
-mv %{buildroot}/platform %{buildroot}%{_datadir}/%{name}/
-
-#mkdir -p %{buildroot}%{_pkgdocdir}
-#mv %{buildroot}/docs/refman.pdf %{buildroot}%{_pkgdocdir}/
-#rm -rf %{buildroot}/docs
-
-latestKernelVersion=$(ls -1t /lib/modules/*/vmlinuz | head -n1 | cut -d'/' -f4)
-
-mkdir -p %{buildroot}/boot/opensbi/unstable
-cp build/platform/sifive/fu540/firmware/fw_jump.elf \
-   %{buildroot}/boot/opensbi/unstable/fw_jump.elf
-cp build/platform/sifive/fu540/firmware/fw_jump.bin \
-   %{buildroot}/boot/opensbi/unstable/fw_jump.bin
-cp build/platform/sifive/fu540/firmware/fw_payload.elf \
-   %{buildroot}/boot/opensbi/unstable/fw_payload-${latestKernelVersion}.elf
-cp build/platform/sifive/fu540/firmware/fw_payload.bin \
-   %{buildroot}/boot/opensbi/unstable/fw_payload-${latestKernelVersion}.bin
-
-# BUILD: kernel
-popd
-
-# BUILD: uboot-qemu-virt
-pushd fedora-builds/uboot-qemu-virt
-
-cp build/platform/qemu/virt/firmware/fw_payload.elf \
-   %{buildroot}/boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.elf
-cp build/platform/qemu/virt/firmware/fw_payload.bin \
-   %{buildroot}/boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.bin
-
-# BUILD: uboot-qemu-virt
-popd
-
-# BUILD: uboot-sifive-fu540
-pushd fedora-builds/uboot-sifive-fu540
-
-cp build/platform/sifive/fu540/firmware/fw_payload.elf \
-   %{buildroot}/boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.elf
-cp build/platform/sifive/fu540/firmware/fw_payload.bin \
-   %{buildroot}/boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.bin
-
-# BUILD: uboot-sifive-fu540
-popd
+rm -rfv %{buildroot}/lib64
+rm -rfv %{buildroot}/include
+rm -rfv %{buildroot}%{_datadir}/%{name}/*/firmware/payloads
 
 
 %files
 %license COPYING.BSD
 %doc README.md
-/boot/opensbi/unstable/fw_jump.{bin,elf}
+%dir %{_datadir}/%{name}
+%{_datadir}/%{name}/*
 
-%files fedora
-/boot/opensbi/unstable/fw_payload-*.{bin,elf}
-%exclude /boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.{bin,elf}
-
-%files libsbi-devel
-#%%doc %%{_pkgdocdir}/refman.pdf
-%{_prefix}/include/sbi/*
-%{_prefix}/include/sbi_utils/*
-%{_libdir}/libsbi.a
-%{_libdir}/libsbiutils.a
-
-%files platform-virt
-%{_datadir}/%{name}
-
-%files images-riscv64
-/boot/opensbi/unstable/fw_payload-uboot-qemu-virt-smode.{bin,elf}
-/boot/opensbi/unstable/fw_payload-uboot-sifive-fu540.{bin,elf}
 
 %changelog
+* Wed Jan 06 2021 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.8.81.2021.01.06.7dcb1e1
+- New version
+- Switch to generic platform
+- Remove all others special Fedora variants of firmware
+- Remove development library and documentation (not needed)
+- Remove example payloads
+
 * Wed Feb 19 2020 David Abdurachmanov <david.abdurachmanov@sifive.com> v0.5.0.2020.02.19.c66543d-1
 - Rebuild for a new OpenSBI (incl. a fix for FU540 TLB flush issue)
 
