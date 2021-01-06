@@ -35,12 +35,18 @@ This is only for QEMU RISC-V virt machine.
 
 
 %build
-make PLATFORM=generic
+make \
+  PLATFORM=generic
+
 
 %install
-make PLATFORM=generic I=%{buildroot} INSTALL_LIB_PATH=lib64 install
+make \
+  PLATFORM=generic \
+  I=%{buildroot} \
+  INSTALL_LIB_PATH=lib64 \
+  INSTALL_FIRMWARE_PATH=%{_datadir}/%{name} \
+  install
 
-mv %{buildroot}%{_datadir}/opensbi %{buildroot}%{_datadir}/%{name}
 
 rm -rfv %{buildroot}/lib64
 rm -rfv %{buildroot}/include
