@@ -4,7 +4,7 @@
 Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
-Version:	v1.0.92.2022.06.13.9dc5ec5
+Version:	v1.0.99.2022.06.23.6f1fe98
 Release:	1%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
@@ -13,7 +13,7 @@ URL:		https://github.com/riscv/opensbi
 
 # Download tarball, e.g.:
 # https://github.com/riscv/opensbi/archive/%full_commit.tar.gz
-%global full_commit 9dc5ec5c519b2ec1702e13a97b9e595ee5d94bf6
+%global full_commit 6f1fe98c2f565a394f258178b0daa3843672395c
 Source0:	https://github.com/riscv/opensbi/archive/%{full_commit}.tar.gz
 
 BuildRequires:	gcc
@@ -61,6 +61,9 @@ rm -rfv %{buildroot}%{_datadir}/%{name}/*/firmware/payloads
 
 
 %changelog
+* Thu Jan 23 2022 David Abdurachmanov <davidlt@rivosinc.com> v1.0.99.2022.06.23.6f1fe98-1
+- Sync with upstream master branch
+
 * Thu Jan 02 2022 David Abdurachmanov <davidlt@rivosinc.com> v1.0.92.2022.06.13.9dc5ec5-1
 - Sync with upstream master branch
 
