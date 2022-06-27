@@ -4,7 +4,7 @@
 Name:		opensbi-unstable
 # The last part is short hash
 # Format: <TAG>.<NUMBER_OF_COMMITS_AFTER_TAG>.<YEAR>.<MONTH>.<DAY>.<SHORT_COMMIT>
-Version:	v1.0.99.2022.06.23.6f1fe98
+Version:	v1.1.0.2022.06.27.4489876
 Release:	1%{?dist}
 Summary:	RISC-V Open Source Supervisor Binary Interface
 
@@ -13,7 +13,7 @@ URL:		https://github.com/riscv/opensbi
 
 # Download tarball, e.g.:
 # https://github.com/riscv/opensbi/archive/%full_commit.tar.gz
-%global full_commit 6f1fe98c2f565a394f258178b0daa3843672395c
+%global full_commit 4489876e933d8ba0d8bc6c64bae71e295d45faac
 Source0:	https://github.com/riscv/opensbi/archive/%{full_commit}.tar.gz
 
 BuildRequires:	gcc
@@ -61,13 +61,16 @@ rm -rfv %{buildroot}%{_datadir}/%{name}/*/firmware/payloads
 
 
 %changelog
-* Thu Jan 23 2022 David Abdurachmanov <davidlt@rivosinc.com> v1.0.99.2022.06.23.6f1fe98-1
+* Mon Jun 23 2022 David Abdurachmanov <davidlt@rivosinc.com> v1.1.0.2022.06.27.4489876-1
+- Sync with upstream master branch (v1.1 tag)
+
+* Thu Jun 23 2022 David Abdurachmanov <davidlt@rivosinc.com> v1.0.99.2022.06.23.6f1fe98-1
 - Sync with upstream master branch
 
-* Thu Jan 02 2022 David Abdurachmanov <davidlt@rivosinc.com> v1.0.92.2022.06.13.9dc5ec5-1
+* Thu Jun 02 2022 David Abdurachmanov <davidlt@rivosinc.com> v1.0.92.2022.06.13.9dc5ec5-1
 - Sync with upstream master branch
 
-* Thu Jan 02 2022 David Abdurachmanov <davidlt@rivosinc.com> v1.0.81.2022.06.02.cb8271c-1
+* Thu Jun 02 2022 David Abdurachmanov <davidlt@rivosinc.com> v1.0.81.2022.06.02.cb8271c-1
 - Sync with upstream master branch
 
 * Sat Nov 06 2021 David Abdurachmanov <david.abdurachmanov@gmail.com> v0.9.163.2021.11.06.0979ffd-1
