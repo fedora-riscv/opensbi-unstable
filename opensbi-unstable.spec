@@ -23,6 +23,9 @@ BuildRequires:	grep
 BuildRequires:	coreutils
 BuildRequires:  make
 BuildRequires:  dtc
+BuildRequires:  python3
+BuildRequires:  gawk
+BuildRequires:  sed
 
 
 %description
